@@ -83,7 +83,7 @@ def fsdp_main(args):
 
     
     train_dataset = zhihu(tokenizer, 'train', 1500, 512, 150, False) 
-    val_dataset = zhihu(tokenizer, 'validation', 300, 512, 150, False)
+    val_dataset = zhihu(tokenizer, 'val', 300, 512, 150, False)
  
     sampler1 = DistributedSampler(train_dataset, rank=rank, num_replicas=world_size, shuffle=True)
     sampler2 = DistributedSampler(val_dataset, rank=rank, num_replicas=world_size)

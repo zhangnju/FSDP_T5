@@ -27,13 +27,9 @@ from transformers import (
 class zhihu(Dataset):
     def __init__(self, tokenizer, type_path, num_samples, input_length, output_length, print_text=False): 
         super().__init__()
-        if type_path=='train':
-            self.dataset = load_dataset("arrow", data_files={'/scratch/dataset/Zhihu-KOL/train/data-00000-of-00005.arrow',
-                                                          '/scratch/dataset/Zhihu-KOL/train/data-00001-of-00005.arrow',
-                                                          '/scratch/dataset/Zhihu-KOL/train/data-00002-of-00005.arrow',
-                                                          '/scratch/dataset/Zhihu-KOL/train/data-00003-of-00005.arrow'})
-        else:
-            self.dataset = load_dataset("arrow", data_files={'/scratch/dataset/Zhihu-KOL/train/data-00004-of-00005.arrow'})        
+        
+        dataset = load_dataset("arrow", data_files={'train': ['/scratch/dataset/Zhihu-KOL/train/data-00000-of-00005.arrow','/scratch/dataset/Zhihu-KOL/train/data-00001-of-00005.arrow','/scratch/dataset/Zhihu-KOL/train/data-00002-of-00005.arrow','/scratch/dataset/Zhihu-KOL/train/data-00003-of-00005.arrow'], 'val': '/scratch/dataset/Zhihu-KOL/train/data-00004-of-00005.arrow'}) 
+        self.dataset = dataset[type_path]     
         if num_samples:
             self.dataset = self.dataset[0, num_samples-1]
         self.input_length = input_length
