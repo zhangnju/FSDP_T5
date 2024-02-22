@@ -35,7 +35,7 @@ class zhihu(Dataset):
         else:
             self.dataset = load_dataset("arrow", data_files={'/scratch/dataset/Zhihu-KOL/train/data-00004-of-00005.arrow'})        
         if num_samples:
-            self.dataset = self.dataset.select(list(range(0, num_samples)))
+            self.dataset = self.dataset[0, num_samples-1]
         self.input_length = input_length
         self.tokenizer = tokenizer
         self.output_length = output_length
