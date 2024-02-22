@@ -31,7 +31,7 @@ class zhihu(Dataset):
             self.dataset = load_dataset("arrow", data_files={['/scratch/dataset/Zhihu-KOL/train/data-00000-of-00005.arrow',
                                                           '/scratch/dataset/Zhihu-KOL/train/data-00001-of-00005.arrow',
                                                           '/scratch/dataset/Zhihu-KOL/train/data-00002-of-00005.arrow',
-                                                          '/scratch/dataset/Zhihu-KOL/train/data-00003-of-00005.arrow'])
+                                                          '/scratch/dataset/Zhihu-KOL/train/data-00003-of-00005.arrow']})
         else:
             self.dataset = load_dataset("arrow", data_files={'/scratch/dataset/Zhihu-KOL/train/data-00004-of-00005.arrow'})        
         if num_samples:
