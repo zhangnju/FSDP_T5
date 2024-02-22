@@ -9,21 +9,19 @@ from tokenizers.pre_tokenizers import Punctuation, Digits, Metaspace
 from tokenizers.normalizers import NFKC 
 from transformers import PreTrainedTokenizerFast
 
-from config import PROJECT_ROOT
+from dataclasses import dataclass
+from os.path import dirname, abspath
+
+# replace '\' on windows to '/'
+PROJECT_ROOT: str = '/'.join(abspath(dirname(__file__)).split('\\')) if '\\' in abspath(dirname(__file__)) else abspath(dirname(__file__))
+
 
 def check_dir_exits(dir: str) -> None:
-    '''
-    检查文件夹是否存在，如果不存在则创建文件夹
-    '''
     if not os.path.exists(dir):
         os.makedirs(dir)
     
 
 def train_hf_wiki_tokenizer(cropus_file: str, max_train_line: int=None, vocab_size: int=40960,token_type: str='char') -> None:
-    '''
-    训练tokenizer with huggingface，至少需要32G内存，运行大概需要半个小时。
-    '''
-
     tokenizer_slow_save_path = PROJECT_ROOT + '/model_save/hf_tokenizer_slow/hf_bpe_tokenizer.json'
     tokenizer_fast_save_path = PROJECT_ROOT + '/model_save/hf_tokenizer'
 
