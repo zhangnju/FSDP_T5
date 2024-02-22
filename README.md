@@ -2,12 +2,6 @@
 
 To run the T5 example with FSDP for text summarization:
 
-## Get the wikihow dataset
-```bash
-
-sh download_dataset.sh
-
-```
 
 ## Install the requirements:
 ~~~
