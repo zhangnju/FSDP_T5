@@ -84,29 +84,29 @@ def fsdp_main(args):
     dataset = load_dataset('wangrui6/Zhihu-KOL', 'all', data_dir='data/')
     print(dataset.keys())
     print("Size of train dataset: ", dataset['train'].shape)
-    print("Size of Validation dataset: ", dataset['validation'].shape)
+    #print("Size of Validation dataset: ", dataset['validation'].shape)
 
    
     #wikihow(tokenizer, type_path, num_samples, input_length, output_length, print_text=False)
     train_dataset = zhihu(tokenizer, 'train', 1500, 512, 150, False) 
-    val_dataset = zhihu(tokenizer, 'validation', 300, 512, 150, False)
+    #val_dataset = zhihu(tokenizer, 'validation', 300, 512, 150, False)
  
     sampler1 = DistributedSampler(train_dataset, rank=rank, num_replicas=world_size, shuffle=True)
-    sampler2 = DistributedSampler(val_dataset, rank=rank, num_replicas=world_size)
+    #sampler2 = DistributedSampler(val_dataset, rank=rank, num_replicas=world_size)
 
     setup()
 
 
     train_kwargs = {'batch_size': args.batch_size, 'sampler': sampler1}
-    test_kwargs = {'batch_size': args.test_batch_size, 'sampler': sampler2}
+    #test_kwargs = {'batch_size': args.test_batch_size, 'sampler': sampler2}
     cuda_kwargs = {'num_workers': 2,
                     'pin_memory': True,
                     'shuffle': False}
     train_kwargs.update(cuda_kwargs)
-    test_kwargs.update(cuda_kwargs)
+    #test_kwargs.update(cuda_kwargs)
 
     train_loader = torch.utils.data.DataLoader(train_dataset,**train_kwargs)
-    val_loader = torch.utils.data.DataLoader(val_dataset, **test_kwargs)
+    #val_loader = torch.utils.data.DataLoader(val_dataset, **test_kwargs)
  
     torch.cuda.set_device(local_rank)
     
@@ -206,7 +206,7 @@ if __name__ == '__main__':
                         help='random seed (default: 1)')
     parser.add_argument('--track_memory', action='store_false', default=True,
                         help='track the gpu memory')
-    parser.add_argument('--run_validation', action='store_false', default=True,
+    parser.add_argument('--run_validation', action='store_false', default=False,
                         help='running the validation')
     args = parser.parse_args()
 

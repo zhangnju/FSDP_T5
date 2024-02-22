@@ -5,7 +5,7 @@ from typing import ClassVar
 @dataclass
 class train_config:
     model_name: str="t5-base"
-    run_validation: bool=True
+    run_validation: bool=False
     batch_size_training: int=4
     num_workers_dataloader: int=2
     lr: float=0.002
