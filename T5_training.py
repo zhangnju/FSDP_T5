@@ -81,15 +81,15 @@ def fsdp_main(args):
     world_size = int(os.environ['WORLD_SIZE'])
 
 
-    dataset = load_dataset('wikihow', 'all', data_dir='data/')
+    dataset = load_dataset('wangrui6/Zhihu-KOL', 'all', data_dir='data/')
     print(dataset.keys())
     print("Size of train dataset: ", dataset['train'].shape)
     print("Size of Validation dataset: ", dataset['validation'].shape)
 
    
     #wikihow(tokenizer, type_path, num_samples, input_length, output_length, print_text=False)
-    train_dataset = wikihow(tokenizer, 'train', 1500, 512, 150, False) 
-    val_dataset = wikihow(tokenizer, 'validation', 300, 512, 150, False)
+    train_dataset = zhihu(tokenizer, 'train', 1500, 512, 150, False) 
+    val_dataset = zhihu(tokenizer, 'validation', 300, 512, 150, False)
  
     sampler1 = DistributedSampler(train_dataset, rank=rank, num_replicas=world_size, shuffle=True)
     sampler2 = DistributedSampler(val_dataset, rank=rank, num_replicas=world_size)

@@ -24,9 +24,9 @@ from transformers import (
     get_linear_schedule_with_warmup
 )
 
-class wikihow(Dataset):
+class zhihu(Dataset):
     def __init__(self, tokenizer, type_path, num_samples, input_length, output_length, print_text=False):         
-        self.dataset =  load_dataset('wikihow', 'all', data_dir='data/', split=type_path)
+        self.dataset =  load_dataset('wangrui6/Zhihu-KOL', 'all', data_dir='data/', split=type_path)
         if num_samples:
             self.dataset = self.dataset.select(list(range(0, num_samples)))
         self.input_length = input_length
@@ -79,5 +79,5 @@ class wikihow(Dataset):
         return {"source_ids": source_ids, "source_mask": src_mask, "target_ids": target_ids, "target_mask": target_mask}
         
 def get_dataset(tokenizer, type_path, num_samples, args):
-      return wikihow(tokenizer=tokenizer, type_path=type_path, num_samples=num_samples,  input_length=max_input_length, 
+      return zhihu(tokenizer=tokenizer, type_path=type_path, num_samples=num_samples,  input_length=max_input_length, 
                         output_length=max_output_length)

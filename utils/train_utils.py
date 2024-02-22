@@ -98,5 +98,6 @@ def validation(model, rank, world_size, val_loader):
 
 def setup_model(model_name):
         model = T5ForConditionalGeneration.from_pretrained(model_name)
-        tokenizer =  T5Tokenizer.from_pretrained(model_name)
+        #tokenizer =  T5Tokenizer.from_pretrained(model_name)
+        tokenizer = AutoTokenizer.from_pretrained('/scratch/FSDP_T5/model_save/hf_tokenizer')
         return model, tokenizer
