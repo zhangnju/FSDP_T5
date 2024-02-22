@@ -28,10 +28,10 @@ class zhihu(Dataset):
     def __init__(self, tokenizer, type_path, num_samples, input_length, output_length, print_text=False): 
         super().__init__()
         if type_path=='train':
-            self.dataset = load_dataset("arrow", data_files={['/scratch/dataset/Zhihu-KOL/train/data-00000-of-00005.arrow',
+            self.dataset = load_dataset("arrow", data_files={'/scratch/dataset/Zhihu-KOL/train/data-00000-of-00005.arrow',
                                                           '/scratch/dataset/Zhihu-KOL/train/data-00001-of-00005.arrow',
                                                           '/scratch/dataset/Zhihu-KOL/train/data-00002-of-00005.arrow',
-                                                          '/scratch/dataset/Zhihu-KOL/train/data-00003-of-00005.arrow']})
+                                                          '/scratch/dataset/Zhihu-KOL/train/data-00003-of-00005.arrow'})
         else:
             self.dataset = load_dataset("arrow", data_files={'/scratch/dataset/Zhihu-KOL/train/data-00004-of-00005.arrow'})        
         if num_samples:
@@ -73,7 +73,7 @@ class zhihu(Dataset):
         # add an eos token note that end of resopnse, using in generate.
         #return f"{prompt[0: max_seq_len]}[EOS]", f"{response[0: max_seq_len]}[EOS]"
 
-   """ 
+    """
     def convert_to_features(self, example_batch):
         # Tokenize contexts and questions (as pairs of inputs)
         
